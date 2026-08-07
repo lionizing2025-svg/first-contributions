@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+/* Toolbar Styles */
+.toolbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.tool-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 0 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tool-group:last-child {
+    border-right: none;
+}
+
+.tool-btn, .action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.tool-btn:hover, .action-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.tool-btn.active {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#colorPicker {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    background: none;
+}
+
+#colorPicker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+#colorPicker::-webkit-color-swatch {
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+#sizeSlider {
+    width: 100px;
+    cursor: pointer;
+}
+
+#sizeValue {
+    color: white;
+    font-size: 14px;
+    min-width: 25px;
+    text-align: center;
+}
+
+/* Canvas Container */
+.canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#drawingCanvas {
+    display: block;
+    background: white;
+    cursor: crosshair;
+}
+
+/* Instructions Panel */
+.instructions {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    z-index: 1000;
+}
+
+.instructions h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.instructions ul {
+    list-style: none;
+    font-size: 13px;
+    color: #333;
+}
+
+.instructions li {
+    margin-bottom: 5px;
+}
+
+.instructions button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+}
+
+.instructions button:hover {
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .toolbar {
+        top: auto;
+        bottom: 20px;
+        padding: 8px 15px;
+        border-radius: 30px;
+    }
+    
+    .tool-btn, .action-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    #sizeSlider {
+        width: 80px;
+    }
+    
+    .instructions {
+        display: none;
+    }
+}
