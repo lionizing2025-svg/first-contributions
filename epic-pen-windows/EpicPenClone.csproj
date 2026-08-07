@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>EpicPenClone</AssemblyName>
+    <RootNamespace>EpicPenClone</RootNamespace>
+    <Version>2.0.0</Version>
+    <Description>A clone of Epic Pen - Screen annotation tool for Windows with auto-erase feature</Description>
+    <Authors>Epic Pen Clone Team</Authors>
+    <Company>Open Source</Company>
+    <Product>Epic Pen Clone</Product>
+  </PropertyGroup>
+
+</Project>
