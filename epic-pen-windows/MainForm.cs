@@ -74,7 +74,7 @@ namespace EpicPenClone
                 {
                     Height = 60,
                     BackColor = Color.FromArgb(240, 240, 240),
-                    Location = new Point((this.Width - 500) / 2, 5)
+                    Location = new Point((this.Width - 580) / 2, 5)
                 };
                 
                 int buttonWidth = 50;
@@ -132,8 +132,12 @@ namespace EpicPenClone
                 _btnClear = CreateActionButton("Clear", startX + (buttonWidth + spacing) * 7 + 20, 5, buttonWidth, buttonHeight);
                 _btnClear.Click += (s, e) => ClearCanvas();
                 
+                // Settings button
+                var btnSettings = CreateActionButton("Settings", startX + (buttonWidth + spacing) * 8 + 20, 5, buttonWidth, buttonHeight);
+                btnSettings.Click += BtnSettings_Click;
+                
                 // Exit button
-                _btnExit = CreateActionButton("Exit", startX + (buttonWidth + spacing) * 8 + 20, 5, buttonWidth, buttonHeight);
+                _btnExit = CreateActionButton("Exit", startX + (buttonWidth + spacing) * 9 + 20, 5, buttonWidth, buttonHeight);
                 _btnExit.BackColor = Color.IndianRed;
                 _btnExit.Click += (s, e) => Application.Exit();
                 
@@ -141,7 +145,7 @@ namespace EpicPenClone
                 _chkAutoErase = new CheckBox
                 {
                     Text = "Auto-Erase",
-                    Location = new Point(startX + (buttonWidth + spacing) * 9 + 20, 15),
+                    Location = new Point(startX + (buttonWidth + spacing) * 10 + 20, 15),
                     AutoSize = true,
                     Checked = false
                 };
@@ -151,13 +155,13 @@ namespace EpicPenClone
                 Label lblAutoEraseDelay = new Label
                 {
                     Text = "Delay (s):",
-                    Location = new Point(startX + (buttonWidth + spacing) * 10 + 30, 15),
+                    Location = new Point(startX + (buttonWidth + spacing) * 11 + 30, 15),
                     AutoSize = true
                 };
                 
                 _numAutoEraseDelay = new NumericUpDown
                 {
-                    Location = new Point(startX + (buttonWidth + spacing) * 10 + 95, 10),
+                    Location = new Point(startX + (buttonWidth + spacing) * 11 + 95, 10),
                     Size = new Size(40, 25),
                     Minimum = 1,
                     Maximum = 60,
@@ -167,11 +171,44 @@ namespace EpicPenClone
                 
                 _toolbarPanel.Controls.AddRange(new Control[] { 
                     _btnPen, _btnHighlighter, _btnEraser, _btnColorPicker, 
-                    lblSize, _numBrushSize, _btnUndo, _btnRedo, _btnClear, _btnExit,
+                    lblSize, _numBrushSize, _btnUndo, _btnRedo, _btnClear, btnSettings, _btnExit,
                     _chkAutoErase, lblAutoEraseDelay, _numAutoEraseDelay
                 });
                 
                 this.Controls.Add(_toolbarPanel);
+            }
+        }
+        
+        private void BtnSettings_Click(object? sender, EventArgs e)
+        {
+            using (var settingsForm = new Form())
+            {
+                settingsForm.Text = "Settings";
+                settingsForm.Size = new Size(300, 200);
+                settingsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                settingsForm.StartPosition = FormStartPosition.CenterScreen;
+                settingsForm.TopMost = true;
+                
+                var lblInfo = new Label
+                {
+                    Text = "Epic Pen Clone Settings\n\nUse toolbar to adjust:\n- Brush tools\n- Colors\n- Sizes\n- Auto-erase delay\n\nPress ESC or click Exit to quit.",
+                    Location = new Point(20, 20),
+                    Size = new Size(250, 120),
+                    AutoSize = false
+                };
+                
+                var btnClose = new Button
+                {
+                    Text = "Close",
+                    Location = new Point(100, 150),
+                    Size = new Size(80, 30)
+                };
+                btnClose.Click += (s, args) => settingsForm.Close();
+                
+                settingsForm.Controls.Add(lblInfo);
+                settingsForm.Controls.Add(btnClose);
+                
+                settingsForm.ShowDialog(this);
             }
         }
         
@@ -415,7 +452,7 @@ namespace EpicPenClone
             // Limit undo stack size
             while (_undoStack.Count > 50)
             {
-                _undoStack.RemoveAt(_undoStack.Count - 1);
+                _undoStack.Pop();
             }
         }
         
